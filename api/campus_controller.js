@@ -63,6 +63,20 @@ router.post("/", (req, res, send) => {
     });
 });
 
+router.post("/newCampus", async (req, res, next) => {
+  console.log("req.body", req.body);
+  try {
+    let newCampus = await models.Campus.create(req.body);
+    res.status(201).send(newCampus);
+    console.log(newCampus);
+  } catch (error) {
+    res.status(404).json({
+      message: "Failed to create new Campus",
+    });
+    next(error);
+  }
+});
+
 // PUT
 // localhost:8080/api/campuses/:id
 // router.put("/", (req, res, send))
