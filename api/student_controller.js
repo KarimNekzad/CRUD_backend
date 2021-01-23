@@ -36,6 +36,7 @@ router.get("/:id", (req, res, next) => {
 // POST -> Create
 // localhost:8080/api/students
 router.post("/", (req, res, next) => {
+  console.log("request body:", req.body)
   models.Student.create({
     studentname: req.body.studentname,
     email: req.body.email,
@@ -58,6 +59,7 @@ router.post("/", (req, res, next) => {
 
 // PUT -> Update //timestamp: 1:19:22 aj words of wisdom, why axios requests can differentiate between the same route names here, sequelize review session (sequelize tutorial)
 router.put("/:id", (req, res, next) => {
+  console.log("request body put:", req.body)
   models.Student.findByPk(req.params.id).then((student) => {
     if (!student) {
       res.status(404).json({
@@ -70,6 +72,7 @@ router.put("/:id", (req, res, next) => {
       email: req.body.email,
       image: req.body.image,
       gpa: req.body.gpa,
+      CampusId: req.body.CampusId,
     })
 
     student.save()
