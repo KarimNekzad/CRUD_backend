@@ -5,7 +5,7 @@ require("dotenv").config()
 const sequelize = new Sequelize("crud", "your_username", "your_password", {
   host: process.env.localhost,
   dialect: "postgres",
-  port: 5433,
+  // port: 5433, this port is only for Jahed
 })
 //
 const testDatabase = async () => {
