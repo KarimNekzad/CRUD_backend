@@ -38,7 +38,8 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
   console.log("request body:", req.body)
   models.Student.create({
-    studentname: req.body.studentname,
+    first: req.body.first,
+    last: req.body.last,
     email: req.body.email,
     image: req.body.image,
     gpa: req.body.gpa,
@@ -68,7 +69,8 @@ router.put("/:id", (req, res, next) => {
     }
 
     student.update({
-      studentname: req.body.studentname,
+      first: req.body.first,
+      last: req.body.last,
       email: req.body.email,
       image: req.body.image,
       gpa: req.body.gpa,
