@@ -27,7 +27,12 @@ router.get("/", (req, res, next) => {
 
 // GET by PK -> Read by ID
 router.get("/:id", (req, res, next) => {
-  models.Campus.findByPk(req.params.id).then((campus) => {
+  console.log("req.params.id in get campus:", req.params.id)
+  models.Campus.findByPk(req.params.id, {
+    include: {
+      model: models.Student,
+    },
+  }).then((campus) => {
     if (!campus) {
       res.status(404).json({
         message: "A campus by that id was not found to read",
@@ -35,14 +40,15 @@ router.get("/:id", (req, res, next) => {
     }
 
     res.status(200).json({
+      message: "Sucessfully retreived campus by id!",
       campus,
     })
   })
 })
 
-// POST
+// POST -> Create
 // localhost:8080/api/campuses
-router.post("/", (req, res, send) => {
+router.post("/", (req, res, next) => {
   models.Campus.create({
     campusname: req.body.campusname,
     image: req.body.image,
